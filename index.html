@@ -12,23 +12,48 @@
 	<body>
 		<div id="card">
 			<header>{{ title }}</header>
+
 			<ul>
 				<li v-for="dino in dinos">
 					<h4>{{ dino.text | capitalize }}</h4>
-					<span>The {{ dino.text | undercase }} weighs {{ dino.weight }}.</span>
-					<br>
+					<span
+						>The {{ dino.text | undercase }} weighs {{ dino.weight
+						}}.</span
+					>
+					<br />
 					<a href="#">{{ dino.text | undercase | url }}</a>
 				</li>
 			</ul>
 			<div>
 				<input id="itemForm" v-on:keyup.enter="addItem" />
-				<button v-on:click="addItem">Add Dinosaur</button>
+				<button v-on:click="addDino">Add Dinosaur</button>
 			</div>
 
 			<ul>
 				<li v-for="(item, index) in items">
-					<button v-on:click="deleteItem(index)">X</button> {{
+					<button v-on:click="deleteDino(index)">X</button> {{
 					item.text }}
+				</li>
+			</ul>
+			<hr />
+			<ul>
+				<li v-for="item in items">
+					<button v-on:click="item.quantity += 1">+</button> {{
+					item.quantity }}
+					<button v-on:click="item.quantity -= 1">-</button> {{
+					item.text }}<button v-on:click="removeItem" class="extinct">
+						Make Extinct
+					</button>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					Total Dinosaurs: {{ totalDinos }}
+					<span>Updated: {{ dinosUpdated }}</span>
+				</li>
+				<li>
+					Total Species: {{ totalSpecies }}
+					<span>Updated: {{ speciesUpdated }}</span>
 				</li>
 			</ul>
 		</div>
